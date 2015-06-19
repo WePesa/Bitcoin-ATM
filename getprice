@@ -1,0 +1,13 @@
+import urllib2
+import json
+import threading
+
+## Gets the last GBP from Blockchain.info ticker every 30 seconds
+def bitcoin():
+    req = urllib2.urlopen("https://blockchain.info/ticker")
+    str_response = req.read().decode('utf-8')
+    obj = json.loads(str_response)
+    print(obj["GBP"]["last"])
+    threading.Timer(30,bitcoin).start()
+
+bitcoin()
